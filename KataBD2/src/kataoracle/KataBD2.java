@@ -10,20 +10,22 @@ import oracle.jdbc.OracleDriver;
 
 
 public class KataBD2 {
-
+    private static final String URL = "jdbc:oracle:thin:@";
+    private static final String  USERNAME = "system";
+    private static final String  PASSWORD = "orcl";
+    private static final String  SERVER = "localhost:1521:orcl";
+    
     public static void main(String[] args) throws SQLException {
-        String url = "jdbc:oracle:thin:@";
-        String userName = "system";
-        String password = "orcl";
-        String server = "10.22.146.229:1521:orcl";
+
         DriverManager.registerDriver(new OracleDriver());
          //jdbc:oracle:thin:@server,username,password
-        Connection connection = DriverManager.getConnection(url+server,userName,password);
+        Connection connection = DriverManager.getConnection(URL+SERVER,USERNAME,PASSWORD);
         Statement statement = connection.createStatement();
-        ResultSet set = statement.executeQuery("Select * from CAMBIO_EUR_A");
-        while(set.next()){
-            printRegister(set);
+        ResultSet resultSet = statement.executeQuery("Select * from CAMBIO_EUR_A");
+        while(resultSet.next()){
+            printRegister(resultSet);
         }
+        connection.close();
     }
 
     private static void printRegister(ResultSet set) throws SQLException {
