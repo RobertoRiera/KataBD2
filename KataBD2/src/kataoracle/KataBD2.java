@@ -1,5 +1,5 @@
 
-package kataBD2;
+package kataoracle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,12 +12,13 @@ import oracle.jdbc.OracleDriver;
 public class KataBD2 {
 
     public static void main(String[] args) throws SQLException {
+        String url = "jdbc:oracle:thin:@";
         String userName = "system";
         String password = "orcl";
         String server = "10.22.146.229:1521:orcl";
         DriverManager.registerDriver(new OracleDriver());
          //jdbc:oracle:thin:@server,username,password
-        Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@"+server,userName,password);
+        Connection connection = DriverManager.getConnection(url+server,userName,password);
         Statement statement = connection.createStatement();
         ResultSet set = statement.executeQuery("Select * from CAMBIO_EUR_A");
         while(set.next()){
